@@ -2,39 +2,37 @@ import React, { useState } from "react";
 import data from "./data";
 function App() {
   const [count, setCount] = useState(0);
-  const [texts, setText] = useState([]);
+  const [text, setText] = useState([]);
 
-  const textSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    let amount = parseInt(count);
+    let amout = parseInt(count);
+
     if (count <= 0) {
-      amount = 1;
+      amout = 0;
     }
     if (count > 8) {
-      amount = 8;
+      amout = 8;
     }
-    setText(data.slice(0, amount));
+    setText(data.slice(0, amout));
   };
+
   return (
     <>
       <section className="section-center">
         <h3>TIRED OF BORING LOREM IPSUM?</h3>
-        <form className="lorem-form">
-          <label>Paragraphs:</label>
+        <form className="lore-form" onSubmit={handleSubmit}>
           <input
             type="number"
-            name="amount"
-            id="amoutn"
             value={count}
             onChange={(e) => setCount(e.target.value)}
           />
-          <button type="submit" onClick={textSubmit} className="btn">
-            generate
-          </button>
+          <button className="btn">button</button>
         </form>
+
         <article className="lorem-text">
-          {texts.map((line, index) => {
-            return <p key={index}> {line} </p>;
+          {text.map((item, index) => {
+            return <p key={index}>{item}</p>;
           })}
         </article>
       </section>
